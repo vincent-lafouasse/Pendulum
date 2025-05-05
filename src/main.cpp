@@ -2,6 +2,7 @@
 
 #include "RenderingCtx.hpp"
 #include "Timer.hpp"
+#include "Config.hpp"
 
 struct Sphere final {
     float center_x;
