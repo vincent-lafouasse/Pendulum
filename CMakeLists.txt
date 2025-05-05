@@ -15,8 +15,10 @@ target_sources(${PROJECT_NAME}
 PRIVATE
 	src/main.cpp
 	src/RenderingCtx.hpp
-	src/Timer.hpp
 	src/Config.hpp
+
+	src/Timer.cpp
+	src/Timer.hpp
 )
 
 target_include_directories(${PROJECT_NAME}
