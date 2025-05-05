@@ -7,8 +7,8 @@ PRIVATE
 		World.cpp
 		World.hpp
 
-		RenderingCtx.cpp
-		RenderingCtx.hpp
+		Renderer.cpp
+		Renderer.hpp
 
 		Timer.cpp
 		Timer.hpp

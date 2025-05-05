@@ -4,9 +4,9 @@
 
 #include "World.hpp"
 
-struct RenderingCtx final {
-    RenderingCtx();
-    ~RenderingCtx();
+struct Renderer final {
+    Renderer();
+    ~Renderer();
     void render(const World& world) const;
 
     SDL_Window* window;

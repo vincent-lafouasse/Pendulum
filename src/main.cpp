@@ -1,11 +1,11 @@
 #include <SDL2/SDL.h>
 
-#include "RenderingCtx.hpp"
+#include "Renderer.hpp"
 #include "Timer.hpp"
 #include "World.hpp"
 
 int main() {
-    RenderingCtx ctx{};
+    Renderer renderer{};
     Timer timer{};
 
     World world{};
@@ -19,7 +19,7 @@ int main() {
             }
         }
 
-        ctx.render(world);
+        renderer.render(world);
 
         timer.cap_frame();
     }

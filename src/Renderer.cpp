@@ -1,8 +1,8 @@
-#include "RenderingCtx.hpp"
+#include "Renderer.hpp"
 
 #include "Config.hpp"
 
-RenderingCtx::RenderingCtx() {
+Renderer::Renderer() {
     constexpr int screen_x_pos = 0;
     constexpr int screen_y_pos = 0;
 
@@ -25,13 +25,13 @@ RenderingCtx::RenderingCtx() {
     }
 }
 
-RenderingCtx::~RenderingCtx() {
+Renderer::~Renderer() {
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
     SDL_Quit();
 }
 
-void RenderingCtx::render(const World& world) const {
+void Renderer::render(const World& world) const {
     (void)world;
     SDL_SetRenderDrawColor(this->renderer, 33, 118, 174, 255);  // blue
     SDL_RenderClear(this->renderer);
