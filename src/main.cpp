@@ -8,12 +8,12 @@
 
 struct World final {
     World()
-        : width{10.0f},
-          height{10.0f / Config::aspect_ratio},
+        : height{10.0f},
+          width{10.0f / Config::aspect_ratio},
           ball{{2.0f, 2.0f}, 1.0f} {}
 
-    const float width;
     const float height;
+    const float width;
 
     Sphere ball;
 };
