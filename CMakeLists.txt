@@ -13,3 +13,10 @@ add_subdirectory(src)
 
 include(cmake/fetch_gtest.cmake)
 add_subdirectory(test)
+
+include(CTest)
+enable_testing()
+
+add_test(NAME Vec2Test
+         COMMAND Vec2Test
+)
