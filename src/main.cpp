@@ -4,17 +4,13 @@
 #include "RenderingCtx.hpp"
 #include "Timer.hpp"
 
-struct Sphere final {
-    float center_x;
-    float center_y;
-    float radius;
-};
+#include "shapes/Sphere.hpp"
 
 struct World final {
     World()
         : width{10.0f},
           height{10.0f / Config::aspect_ratio},
-          ball{2.0f, 2.0f, 1.0f} {}
+          ball{{2.0f, 2.0f}, 1.0f} {}
 
     const float width;
     const float height;

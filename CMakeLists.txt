@@ -23,6 +23,8 @@ PRIVATE
 
 	src/Config.hpp
 
+	src/shapes/Sphere.hpp
+
 	src/math/Vec2.hpp
 )
 
