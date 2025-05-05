@@ -17,7 +17,7 @@ Vec2 operator*(Vec2::Scalar s, Vec2 rhs) {
 }
 
 Vec2 operator/(Vec2 lhs, Vec2::Scalar s) {
-    return (static_cast<Vec2::Scalar>(1.0) / s) * lhs;
+    return (Vec2::scalar_one() / s) * lhs;
 }
 
 Vec2 Vec2::operator+=(Vec2 other) {

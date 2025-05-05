@@ -27,6 +27,9 @@ struct Vec2 final {
 
     [[nodiscard]] std::string repr() const;
 
+    static Scalar scalar_one() { return static_cast<Scalar>(1.0); }
+    static Scalar scalar_zero() { return static_cast<Scalar>(0.0); }
+
     Scalar x;
     Scalar y;
 };

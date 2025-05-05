@@ -27,11 +27,11 @@ Vec2 Vec2::cross(Vec2 lhs, Vec2 rhs) {
 }
 
 bool Vec2::is_aligned_with(Vec2 other) const {
-    return this->cross(other) == Vec2{0.0f, 0.0f};
+    return this->cross(other) == Vec2{scalar_zero(), scalar_zero()};
 }
 
 bool Vec2::is_orthogonal_to(Vec2 other) const {
-    return this->dot(other) == 0.0f;
+    return this->dot(other) == scalar_zero();
 }
 
 std::string Vec2::repr() const {
