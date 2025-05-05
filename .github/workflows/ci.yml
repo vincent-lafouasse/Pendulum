@@ -27,4 +27,4 @@ jobs:
       run: cmake --build build
       
     - name: run tests
-      run: GTEST_COLOR=1 ctest --test-dir build -V
+      run: ctest --test-dir build -V
