@@ -22,6 +22,8 @@ PRIVATE
 	src/Timer.hpp
 
 	src/Config.hpp
+
+	src/math/Vec2.hpp
 )
 
 target_include_directories(${PROJECT_NAME}
