@@ -4,8 +4,7 @@
 
 #include "Config.hpp"
 
-class RenderingCtx final {
-   public:
+struct RenderingCtx final {
     RenderingCtx() {
         constexpr int screen_x_pos = 0;
         constexpr int screen_y_pos = 0;
@@ -42,7 +41,6 @@ class RenderingCtx final {
         SDL_RenderPresent(this->renderer);
     }
 
-   private:
     SDL_Window* window;
     SDL_Renderer* renderer;
 };
