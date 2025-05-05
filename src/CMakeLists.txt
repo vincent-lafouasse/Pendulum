@@ -2,21 +2,24 @@ add_executable(${PROJECT_NAME})
 
 target_sources(${PROJECT_NAME}
 PRIVATE
-	main.cpp
+		main.cpp
 
-	RenderingCtx.cpp
-	RenderingCtx.hpp
+		World.cpp
+		World.hpp
 
-	Timer.cpp
-	Timer.hpp
+		RenderingCtx.cpp
+		RenderingCtx.hpp
 
-	Config.hpp
+		Timer.cpp
+		Timer.hpp
 
-	shapes/Sphere.hpp
+		Config.hpp
 
-	math/Vec2.cpp
-	math/Vec2_arithmetic.cpp
-	math/Vec2.hpp
+		shapes/Sphere.hpp
+
+		math/Vec2.cpp
+		math/Vec2_arithmetic.cpp
+		math/Vec2.hpp
 )
 
 target_include_directories(${PROJECT_NAME}
