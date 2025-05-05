@@ -1,7 +1,8 @@
 #include <SDL2/SDL.h>
 
-constexpr size_t height = 600;
+constexpr float aspect_ratio = 16.0f / 9.0f;
 constexpr size_t width = 800;
+constexpr size_t height = static_cast<size_t>(width / aspect_ratio);
 constexpr float target_fps = 10;
 
 #define NICE_BLUE 33, 118, 174, 255
