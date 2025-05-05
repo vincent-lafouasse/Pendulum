@@ -27,4 +27,4 @@ jobs:
       run: cmake --build build
       
     - name: run tests
-      run: make test # a hack to allow colored output
+      run: make verbose_test # a hack to allow colored output
