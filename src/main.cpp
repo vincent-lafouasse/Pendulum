@@ -40,12 +40,17 @@ class RenderingCtx final {
         SDL_Quit();
     }
 
-   public:
+    void render(/* pass world later */) {
+        SDL_SetRenderDrawColor(this->renderer, 33, 118, 174, 255);  // blue
+        SDL_RenderClear(this->renderer);
+
+        SDL_RenderPresent(this->renderer);
+    }
+
+   private:
     SDL_Window* window;
     SDL_Renderer* renderer;
 };
-
-#define NICE_BLUE 33, 118, 174, 255
 
 void cap_fps(uint32_t frame_beginning_tick);
 
@@ -53,7 +58,6 @@ int main() {
     RenderingCtx ctx{};
 
     SDL_Event event;
-
     while (true) {
         const uint32_t frame_beginning_tick = SDL_GetTicks();
         if (SDL_PollEvent(&event)) {
@@ -62,10 +66,7 @@ int main() {
             }
         }
 
-        SDL_SetRenderDrawColor(ctx.renderer, NICE_BLUE);
-        SDL_RenderClear(ctx.renderer);
-
-        SDL_RenderPresent(ctx.renderer);
+        ctx.render();
 
         cap_fps(frame_beginning_tick);
     }
