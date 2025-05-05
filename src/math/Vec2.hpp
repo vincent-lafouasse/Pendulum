@@ -5,17 +5,17 @@
 struct Vec2 final {
     using Scalar = float;
 
-    Scalar magnitude() const;
+    [[nodiscard]] Scalar magnitude() const;
     void normalize();
 
-    Scalar dot(Vec2 other) const;
-    static Scalar dot(Vec2 lhs, Vec2 rhs);
+    [[nodiscard]] Scalar dot(Vec2 other) const;
+    [[nodiscard]] static Scalar dot(Vec2 lhs, Vec2 rhs);
 
-    Vec2 cross(Vec2 other) const;
-    static Vec2 cross(Vec2 lhs, Vec2 rhs);
+    [[nodiscard]] Vec2 cross(Vec2 other) const;
+    [[nodiscard]] static Vec2 cross(Vec2 lhs, Vec2 rhs);
 
-    bool is_aligned_with(Vec2 other) const;
-    bool is_orthogonal_to(Vec2 other) const;
+    [[nodiscard]] bool is_aligned_with(Vec2 other) const;
+    [[nodiscard]] bool is_orthogonal_to(Vec2 other) const;
 
     Vec2 operator+=(Vec2 other);
     Vec2 operator-=(Vec2 other);
@@ -25,7 +25,7 @@ struct Vec2 final {
     bool operator==(Vec2 other) const;
     bool operator!=(Vec2 other) const;
 
-    std::string repr() const;
+    [[nodiscard]] std::string repr() const;
 
     Scalar x;
     Scalar y;
