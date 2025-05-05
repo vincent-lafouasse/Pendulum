@@ -11,8 +11,8 @@ RenderingCtx::RenderingCtx() {
         exit(EXIT_FAILURE);
     }
     this->window =
-        SDL_CreateWindow("a window", screen_x_pos, screen_y_pos,
-                         Config::width, Config::height, SDL_WINDOW_OPENGL);
+        SDL_CreateWindow("a window", screen_x_pos, screen_y_pos, Config::width,
+                         Config::height, SDL_WINDOW_OPENGL);
     if (this->window == nullptr) {
         SDL_Log("Could not create a window: %s", SDL_GetError());
         exit(EXIT_FAILURE);
