@@ -1,14 +1,7 @@
 #include <SDL2/SDL.h>
-#include <SDL_timer.h>
 
-struct Config final {
-    static constexpr float aspect_ratio = 16.0f / 9.0f;
-    static constexpr size_t width = 800;
-    static constexpr size_t height = static_cast<size_t>(width / aspect_ratio);
-    static constexpr float target_fps = 10.0f;
-    static constexpr size_t ms_per_frame =
-        static_cast<size_t>(1000.0f / target_fps);
-};
+#include "Config.hpp"
+#include "Timer.hpp"
 
 class RenderingCtx final {
    public:
@@ -51,29 +44,6 @@ class RenderingCtx final {
    private:
     SDL_Window* window;
     SDL_Renderer* renderer;
-};
-
-class Timer final {
-   public:
-    using UInt = uint32_t;  // returned by SDL_GetTicks()
-
-    Timer() : ms_per_frame(Config::ms_per_frame) {}
-
-    void start_frame() { this->frame_start_ms = SDL_GetTicks(); }
-
-    void cap_frame() const {
-        const UInt frame_end_ms = SDL_GetTicks();
-        const UInt time_to_wait =
-            this->ms_per_frame - (frame_end_ms - this->frame_start_ms);
-
-        if (time_to_wait > 0) {
-            SDL_Delay(time_to_wait);
-        }
-    }
-
-   private:
-    const UInt ms_per_frame;
-    UInt frame_start_ms;
 };
 
 int main() {
