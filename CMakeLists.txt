@@ -40,3 +40,4 @@ PRIVATE
 	${SDL2_LIBRARIES}
 )
 
+include(cmake/fetch_gtest.cmake)
