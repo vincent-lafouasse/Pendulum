@@ -12,3 +12,4 @@ include_directories(${SDL2_INCLUDE_DIRS})
 add_subdirectory(src)
 
 include(cmake/fetch_gtest.cmake)
+add_subdirectory(test)
