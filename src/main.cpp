@@ -9,15 +9,48 @@ struct Config final {
         static_cast<size_t>(1000.0f / target_fps);
 };
 
+class RenderingCtx final {
+   public:
+    RenderingCtx() {
+        constexpr int screen_x_pos = 0;
+        constexpr int screen_y_pos = 0;
+
+        if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+            printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+            exit(EXIT_FAILURE);
+        }
+        this->window =
+            SDL_CreateWindow("a window", screen_x_pos, screen_y_pos,
+                             Config::width, Config::height, SDL_WINDOW_OPENGL);
+        if (this->window == nullptr) {
+            SDL_Log("Could not create a window: %s", SDL_GetError());
+            exit(EXIT_FAILURE);
+        }
+        this->renderer =
+            SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
+        if (this->renderer == nullptr) {
+            SDL_Log("Could not create a renderer: %s", SDL_GetError());
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    ~RenderingCtx() {
+        SDL_DestroyRenderer(this->renderer);
+        SDL_DestroyWindow(this->window);
+        SDL_Quit();
+    }
+
+   public:
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+};
+
 #define NICE_BLUE 33, 118, 174, 255
 
 void cap_fps(uint32_t frame_beginning_tick);
-void init_SDL(SDL_Window** return_window, SDL_Renderer** return_renderer);
 
 int main() {
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    init_SDL(&window, &renderer);
+    RenderingCtx ctx{};
 
     SDL_Event event;
 
@@ -29,16 +62,13 @@ int main() {
             }
         }
 
-        SDL_SetRenderDrawColor(renderer, NICE_BLUE);
-        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(ctx.renderer, NICE_BLUE);
+        SDL_RenderClear(ctx.renderer);
 
-        SDL_RenderPresent(renderer);
+        SDL_RenderPresent(ctx.renderer);
 
         cap_fps(frame_beginning_tick);
     }
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
     return (EXIT_SUCCESS);
 }
 void cap_fps(uint32_t frame_beginning_tick) {
@@ -48,28 +78,5 @@ void cap_fps(uint32_t frame_beginning_tick) {
 
     if (time_to_wait > 0) {
         SDL_Delay(time_to_wait);
-    }
-}
-
-void init_SDL(SDL_Window** return_window, SDL_Renderer** return_renderer) {
-    constexpr int SCREEN_X_POS = 0;
-    constexpr int SCREEN_Y_POS = 0;
-
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-        exit(EXIT_FAILURE);
-    }
-    *return_window =
-        SDL_CreateWindow("a window", SCREEN_X_POS, SCREEN_Y_POS, Config::width,
-                         Config::height, SDL_WINDOW_OPENGL);
-    if (*return_window == nullptr) {
-        SDL_Log("Could not create a window: %s", SDL_GetError());
-        exit(EXIT_FAILURE);
-    }
-    *return_renderer =
-        SDL_CreateRenderer(*return_window, -1, SDL_RENDERER_ACCELERATED);
-    if (*return_renderer == nullptr) {
-        SDL_Log("Could not create a renderer: %s", SDL_GetError());
-        exit(EXIT_FAILURE);
     }
 }
