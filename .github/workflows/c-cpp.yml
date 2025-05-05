@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: install deps
+      run: sudo apt-get install libsdl2-dev
+    
+    - name: configure
+      run: cmake -S . -B build -G Ninja
+      
+    - name: build
+      run: cmake --build build --target Pendulum
+      
+    - name: build tests
+      run: cmake --build build
+      
+    - name: run tests
+      run: GTEST_COLOR=1 ctest --test-dir build -V
