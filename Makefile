@@ -18,8 +18,8 @@ test:
 	GTEST_COLOR=1 ctest --test-dir build $(CTEST_OPT)
 
 .PHONY: vtest
-vtest: CTEST_OPT += -VV
-vtest: test
+verbose_test: CTEST_OPT += -VV
+verbose_test: test
 
 .PHONY: format
 format:
@@ -31,5 +31,5 @@ format:
 b: build
 r: run
 t: test
-vt: vtest
+vt: verbose_test
 fmt: format
