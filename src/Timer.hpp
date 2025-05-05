@@ -1,14 +1,12 @@
 #pragma once
 
-#include <cstdint>
-
 #include <SDL_timer.h>
 
 #include "Config.hpp"
 
 class Timer final {
    public:
-    using UInt = uint32_t;  // returned by SDL_GetTicks()
+    using UInt = decltype(SDL_GetTicks());
 
     Timer() : ms_per_frame(Config::ms_per_frame) {}
 
