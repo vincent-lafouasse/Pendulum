@@ -2,10 +2,12 @@
 
 #include <SDL2/SDL.h>
 
+#include "World.hpp"
+
 struct RenderingCtx final {
     RenderingCtx();
     ~RenderingCtx();
-    void render(/* pass world later */);
+    void render(const World& world) const;
 
     SDL_Window* window;
     SDL_Renderer* renderer;

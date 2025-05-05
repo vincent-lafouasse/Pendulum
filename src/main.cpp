@@ -19,7 +19,7 @@ int main() {
             }
         }
 
-        ctx.render();
+        ctx.render(world);
 
         timer.cap_frame();
     }

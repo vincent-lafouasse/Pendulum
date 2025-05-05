@@ -31,7 +31,8 @@ RenderingCtx::~RenderingCtx() {
     SDL_Quit();
 }
 
-void RenderingCtx::render(/* pass world later */) {
+void RenderingCtx::render(const World& world) const {
+    (void)world;
     SDL_SetRenderDrawColor(this->renderer, 33, 118, 174, 255);  // blue
     SDL_RenderClear(this->renderer);
 
