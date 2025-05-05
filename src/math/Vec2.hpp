@@ -30,6 +30,7 @@ struct Vec2 final {
 
 Vec2 operator+(Vec2 lhs, Vec2 rhs);
 Vec2 operator-(Vec2 lhs, Vec2 rhs);
+Vec2 operator-(Vec2 v);
 
 Vec2 operator*(Vec2::Scalar s, Vec2 rhs);
 Vec2 operator/(Vec2 lhs, Vec2::Scalar s);
