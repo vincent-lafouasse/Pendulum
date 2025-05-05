@@ -14,6 +14,9 @@ struct Vec2 final {
     Vec2 cross(Vec2 other) const;
     static Vec2 cross(Vec2 lhs, Vec2 rhs);
 
+    bool is_aligned_with(Vec2 other) const;
+    bool is_orthogonal_to(Vec2 other) const;
+
     Vec2 operator+=(Vec2 other);
     Vec2 operator-=(Vec2 other);
     Vec2 operator*=(Scalar s);
