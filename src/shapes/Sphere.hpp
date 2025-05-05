@@ -3,6 +3,6 @@
 #include "math/Vec2.hpp"
 
 struct Sphere final {
-    Vec2 center;
+    Point2 center;
     float radius;
 };
