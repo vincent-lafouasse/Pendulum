@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL_timer.h>
 
 struct Config final {
     static constexpr float aspect_ratio = 16.0f / 9.0f;
@@ -52,14 +53,36 @@ class RenderingCtx final {
     SDL_Renderer* renderer;
 };
 
-void cap_fps(uint32_t frame_beginning_tick);
+class Timer final {
+   public:
+    using UInt = uint32_t;  // returned by SDL_GetTicks()
+
+    Timer() : ms_per_frame(Config::ms_per_frame) {}
+
+    void start_frame() { this->frame_start_ms = SDL_GetTicks(); }
+
+    void cap_frame() const {
+        const UInt frame_end_ms = SDL_GetTicks();
+        const UInt time_to_wait =
+            this->ms_per_frame - (frame_end_ms - this->frame_start_ms);
+
+        if (time_to_wait > 0) {
+            SDL_Delay(time_to_wait);
+        }
+    }
+
+   private:
+    const UInt ms_per_frame;
+    UInt frame_start_ms;
+};
 
 int main() {
     RenderingCtx ctx{};
+    Timer timer{};
 
     SDL_Event event;
     while (true) {
-        const uint32_t frame_beginning_tick = SDL_GetTicks();
+        timer.start_frame();
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 break;
@@ -68,16 +91,8 @@ int main() {
 
         ctx.render();
 
-        cap_fps(frame_beginning_tick);
+        timer.cap_frame();
     }
-    return (EXIT_SUCCESS);
-}
-void cap_fps(uint32_t frame_beginning_tick) {
-    const uint32_t frame_end_tick = SDL_GetTicks();
-    const uint32_t time_to_wait =
-        Config::ms_per_frame - (frame_end_tick - frame_beginning_tick);
 
-    if (time_to_wait > 0) {
-        SDL_Delay(time_to_wait);
-    }
+    return (EXIT_SUCCESS);
 }
