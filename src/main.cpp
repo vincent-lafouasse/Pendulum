@@ -1,9 +1,8 @@
 #include <SDL2/SDL.h>
 
-#include "World.hpp"
 #include "RenderingCtx.hpp"
 #include "Timer.hpp"
-
+#include "World.hpp"
 
 int main() {
     RenderingCtx ctx{};

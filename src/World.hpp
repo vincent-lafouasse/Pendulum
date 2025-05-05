@@ -1,7 +1,7 @@
 #pragma once
 
-#include "shapes/Sphere.hpp"
 #include "Config.hpp"
+#include "shapes/Sphere.hpp"
 
 struct World final {
     World()
