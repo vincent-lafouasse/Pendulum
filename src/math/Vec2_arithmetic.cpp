@@ -17,7 +17,7 @@ Vec2 operator*(Vec2::Scalar s, Vec2 rhs) {
 }
 
 Vec2 operator/(Vec2 lhs, Vec2::Scalar s) {
-    return (1.0/s) * lhs;
+    return (1.0 / s) * lhs;
 }
 
 Vec2 Vec2::operator+=(Vec2 other) {
@@ -39,7 +39,6 @@ Vec2 Vec2::operator/=(Scalar s) {
     *this = *this / s;
     return *this;
 }
-
 
 bool Vec2::operator==(Vec2 other) const {
     return (this->x == other.x) && (this->y == other.y);

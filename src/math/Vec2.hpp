@@ -9,7 +9,7 @@ struct Vec2 final {
     void normalize();
 
     Scalar dot(Vec2 other) const;
-    static Scalar dot (Vec2 lhs, Vec2 rhs);
+    static Scalar dot(Vec2 lhs, Vec2 rhs);
 
     Vec2 cross(Vec2 other) const;
     static Vec2 cross(Vec2 lhs, Vec2 rhs);
@@ -19,8 +19,8 @@ struct Vec2 final {
     Vec2 operator*=(Scalar s);
     Vec2 operator/=(Scalar s);
 
-    bool operator==(Vec2 other) const; 
-    bool operator!=(Vec2 other) const; 
+    bool operator==(Vec2 other) const;
+    bool operator!=(Vec2 other) const;
 
     std::string repr() const;
 
