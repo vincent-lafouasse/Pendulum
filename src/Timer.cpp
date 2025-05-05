@@ -1,5 +1,7 @@
 #include "Timer.hpp"
 
+#include "Config.hpp"
+
 Timer::Timer()
     : ms_per_frame(Config::ms_per_frame), frame_start_is_init(false) {}
 
