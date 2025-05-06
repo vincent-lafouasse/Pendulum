@@ -5,6 +5,8 @@
 #include "World.hpp"
 
 int main() {
+    Config::log();
+
     Renderer renderer{};
     Timer timer{};
 
