@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(Pendulum VERSION 0.1.0)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -fdiagnostics-color=always")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -fdiagnostics-color=always -g3")
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
 find_package(SDL2 REQUIRED)
