@@ -8,7 +8,7 @@ build:
 
 .PHONY: build
 run: build
-	./build/Pendulum
+	./build/src/Pendulum
 
 CTEST_OPT = 
 .PHONY: test
