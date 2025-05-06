@@ -37,20 +37,17 @@ void Renderer::render(const World& world) const {
     SDL_RenderClear(this->renderer);
 
     SDL_SetRenderDrawColor(this->renderer, 0, 0, 0, 255);  // black
-    /*
     for (auto row = 0ul; row < Config::height; ++row) {
         for (auto col = 0ul; col < Config::width; ++col) {
             Point2 pixel{static_cast<float>(col) * Config::delta_x,
-                                  static_cast<float>(row) * Config::delta_y};
+                         static_cast<float>(row) * Config::delta_y};
             pixel += {Config::delta_x / 2.0f, Config::delta_y / 2.0f};
 
             if (world.ball.contains(pixel)) {
                 SDL_RenderDrawPoint(this->renderer, col, row);
             }
-
         }
     }
-    */
 
     SDL_RenderPresent(this->renderer);
 }
