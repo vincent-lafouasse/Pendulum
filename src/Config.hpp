@@ -6,9 +6,11 @@ namespace Config {
 constexpr float aspect_ratio = 16.0f / 9.0f;
 constexpr size_t width = 800;
 constexpr size_t height = static_cast<size_t>(width / aspect_ratio);
+constexpr float actual_aspect_ratio =
+    static_cast<float>(width) / static_cast<float>(height);
 
 constexpr float viewport_height = 10.0f;
-constexpr float viewport_width = viewport_height * aspect_ratio;
+constexpr float viewport_width = viewport_height * actual_aspect_ratio;
 
 constexpr float delta_x = viewport_width / width;
 constexpr float delta_y = viewport_height / height;
