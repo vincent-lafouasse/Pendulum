@@ -41,3 +41,23 @@ TEST(Vec2, Subtraction) {
 
     ASSERT_VEC2_EQUAL(expected, actual);
 }
+
+TEST(Vec2, ExternalMultiplication) {
+    Vec2 v{1.0, 2.0};
+    Vec2::Scalar s{4.0f};
+
+    Vec2 expected{4.0, 8.0};
+    Vec2 actual = s * v;
+
+    ASSERT_VEC2_EQUAL(expected, actual);
+}
+
+TEST(Vec2, ExternalDivision) {
+    Vec2 v{1.0, 2.0};
+    Vec2::Scalar s{4.0f};
+
+    Vec2 expected{0.25, 0.5};
+    Vec2 actual = v / s;
+
+    ASSERT_VEC2_EQUAL(expected, actual);
+}
