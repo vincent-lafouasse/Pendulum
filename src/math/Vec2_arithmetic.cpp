@@ -1,5 +1,7 @@
 #include "Vec2.hpp"
 
+#include "./math.hpp"
+
 Vec2 operator+(Vec2 lhs, Vec2 rhs) {
     return {lhs.x + rhs.x, lhs.y + rhs.y};
 }
@@ -17,7 +19,7 @@ Vec2 operator*(Vec2::Scalar s, Vec2 rhs) {
 }
 
 Vec2 operator/(Vec2 lhs, Vec2::Scalar s) {
-    return (Vec2::scalar_one() / s) * lhs;
+    return (1.0f / s) * lhs;
 }
 
 Vec2 Vec2::operator+=(Vec2 other) {
@@ -41,7 +43,7 @@ Vec2 Vec2::operator/=(Scalar s) {
 }
 
 bool Vec2::operator==(Vec2 other) const {
-    return (this->x == other.x) && (this->y == other.y);
+    return float_equal(this->x, other.x) && float_equal(this->y, other.y);
 }
 
 bool Vec2::operator!=(Vec2 other) const {

@@ -2,6 +2,8 @@
 
 #include <sstream>
 
+#include "./math.hpp"
+
 Vec2::Scalar Vec2::magnitude() const {
     return this->dot(*this);
 }
@@ -27,11 +29,11 @@ Vec2 Vec2::cross(Vec2 lhs, Vec2 rhs) {
 }
 
 bool Vec2::is_aligned_with(Vec2 other) const {
-    return this->cross(other).magnitude() == scalar_zero();
+    return float_equal(this->cross(other).magnitude(), 0.0f);
 }
 
 bool Vec2::is_orthogonal_to(Vec2 other) const {
-    return this->dot(other) == scalar_zero();
+    return float_equal(this->dot(other), 0.0f);
 }
 
 std::string Vec2::repr() const {

@@ -6,9 +6,12 @@ PRIVATE
 	./main.cpp
 	./Vec2Test.cpp
 
+	${testedSourceDir}/math/math.hpp
 	${testedSourceDir}/math/Vec2.cpp
 	${testedSourceDir}/math/Vec2_arithmetic.cpp
 	${testedSourceDir}/math/Vec2.hpp
+	${testedSourceDir}/math/float_equal.cpp
+
 )
 
 target_include_directories(Vec2Test
