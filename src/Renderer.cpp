@@ -34,10 +34,8 @@ Renderer::~Renderer() {
 
 namespace {
 Point2 compute_pixel(int x, int y) {
-    Point2 out{static_cast<float>(x) * Viewport::delta_x,
-               static_cast<float>(y) * Viewport::delta_y};
-
-    return out + Vec2{Viewport::delta_x / 2.0f, Viewport::delta_y / 2.0f};
+    return Viewport::pixel00 +
+           Viewport::delta * Vec2{static_cast<float>(x), static_cast<float>(y)};
 }
 }  // namespace
 
