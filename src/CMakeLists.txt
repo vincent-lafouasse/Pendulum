@@ -14,6 +14,7 @@ PRIVATE
 		Timer.hpp
 
 		Config.hpp
+		Viewport.hpp
 
 		shapes/Sphere.hpp
 

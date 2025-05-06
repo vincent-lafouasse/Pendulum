@@ -1,6 +1,7 @@
 #include "Renderer.hpp"
 
 #include "Config.hpp"
+#include "Viewport.hpp"
 
 Renderer::Renderer() {
     constexpr int screen_x_pos = 0;
@@ -31,20 +32,27 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
+namespace {
+Point2 compute_pixel(int x, int y) {
+    Point2 out{static_cast<float>(x) * Viewport::delta_x,
+               static_cast<float>(y) * Viewport::delta_y};
+
+    return out + Vec2{Viewport::delta_x / 2.0f, Viewport::delta_y / 2.0f};
+}
+}  // namespace
+
 void Renderer::render(const World& world) const {
     (void)world;
     SDL_SetRenderDrawColor(this->renderer, 33, 118, 174, 255);  // blue
     SDL_RenderClear(this->renderer);
 
     SDL_SetRenderDrawColor(this->renderer, 0, 0, 0, 255);  // black
-    for (auto row = 0ul; row < Config::height; ++row) {
-        for (auto col = 0ul; col < Config::width; ++col) {
-            Point2 pixel{static_cast<float>(col) * Config::delta_x,
-                         static_cast<float>(row) * Config::delta_y};
-            pixel += {Config::delta_x / 2.0f, Config::delta_y / 2.0f};
+    for (int y = 0; y < Config::height; ++y) {
+        for (int x = 0; x < Config::width; ++x) {
+            const Point2 pixel = compute_pixel(x, y);
 
             if (world.ball.contains(pixel)) {
-                SDL_RenderDrawPoint(this->renderer, col, row);
+                SDL_RenderDrawPoint(this->renderer, x, y);
             }
         }
     }
