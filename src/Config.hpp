@@ -3,8 +3,8 @@
 #include <cstddef>
 
 namespace Config {
-constexpr float aspect_ratio = 16.0f / 9.0f;
-constexpr int width = 800;
+constexpr float aspect_ratio = 3.0f / 2.0f;
+constexpr int width = 300;
 constexpr int height = static_cast<int>(width / aspect_ratio);
 
 constexpr float target_fps = 10.0f;
