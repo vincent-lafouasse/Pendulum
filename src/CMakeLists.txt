@@ -18,9 +18,11 @@ PRIVATE
 
 		shapes/Sphere.hpp
 
+		math/math.hpp
 		math/Vec2.cpp
 		math/Vec2_arithmetic.cpp
 		math/Vec2.hpp
+		math/float_equal.cpp
 )
 
 target_include_directories(${PROJECT_NAME}
