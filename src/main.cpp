@@ -2,10 +2,12 @@
 
 #include "Renderer.hpp"
 #include "Timer.hpp"
+#include "Viewport.hpp"
 #include "World.hpp"
 
 int main() {
     Config::log();
+    Viewport::log();
 
     Renderer renderer{};
     Timer timer{};
