@@ -11,7 +11,8 @@ inline constexpr float viewport_height = 10.0f;
 inline constexpr float viewport_width = viewport_height * actual_aspect_ratio;
 
 inline constexpr float delta = viewport_width / Config::width;
-inline constexpr Vec2 pixel00 = Vec2{0.5f * Viewport::delta, 0.5f * Viewport::delta};
+inline constexpr Vec2 pixel00 =
+    Vec2{0.5f * Viewport::delta, 0.5f * Viewport::delta};
 
 static inline void log() {
     std::clog << "Viewport {\n";
