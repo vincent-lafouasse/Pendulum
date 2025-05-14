@@ -11,8 +11,8 @@ struct Vec2 final {
     [[nodiscard]] Scalar dot(Vec2 other) const;
     [[nodiscard]] static Scalar dot(Vec2 lhs, Vec2 rhs);
 
-    [[nodiscard]] Vec2 cross(Vec2 other) const;
-    [[nodiscard]] static Vec2 cross(Vec2 lhs, Vec2 rhs);
+    [[nodiscard]] Scalar determinant(Vec2 other) const;
+    [[nodiscard]] static Scalar determinant(Vec2 lhs, Vec2 rhs);
 
     [[nodiscard]] bool is_aligned_with(Vec2 other) const;
     [[nodiscard]] bool is_orthogonal_to(Vec2 other) const;

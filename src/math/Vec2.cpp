@@ -20,16 +20,16 @@ Vec2::Scalar Vec2::dot(Vec2 lhs, Vec2 rhs) {
     return lhs.x * rhs.x + lhs.y * rhs.y;
 }
 
-Vec2 Vec2::cross(Vec2 other) const {
-    return Vec2::cross(*this, other);
+Vec2::Scalar Vec2::determinant(Vec2 other) const {
+    return Vec2::determinant(*this, other);
 }
 
-Vec2 Vec2::cross(Vec2 lhs, Vec2 rhs) {
-    return {lhs.x * rhs.y - lhs.y * rhs.x, lhs.y * rhs.x - lhs.x * rhs.y};
+Vec2::Scalar Vec2::determinant(Vec2 lhs, Vec2 rhs) {
+    return lhs.x * rhs.y - lhs.y * rhs.x;
 }
 
 bool Vec2::is_aligned_with(Vec2 other) const {
-    return float_equal(this->cross(other).magnitude(), 0.0f);
+    return float_equal(this->determinant(other), 0.0f);
 }
 
 bool Vec2::is_orthogonal_to(Vec2 other) const {
