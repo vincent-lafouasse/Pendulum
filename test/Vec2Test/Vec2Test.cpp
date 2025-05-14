@@ -110,3 +110,15 @@ TEST(Polar, MinusExHas3PiOver2Angle) {
     ASSERT_FLOAT_EQ(v.r(), 1.0f);
     ASSERT_FLOAT_EQ(v.theta(), 1.5f * Constants::Pi);
 }
+
+TEST(Polar, BackToCartesian) {
+    Vec2 ex = Vec2::ex();
+    Vec2 ey = Vec2::ey();
+    Vec2 cool_vec{420, 69};
+
+    ASSERT_VEC2_EQUAL(ex, ex.as_polar().as_cartesian());
+    ASSERT_VEC2_EQUAL(ey, ey.as_polar().as_cartesian());
+    ASSERT_VEC2_EQUAL(-ex, (-ex).as_polar().as_cartesian());
+    ASSERT_VEC2_EQUAL(-ey, (-ey).as_polar().as_cartesian());
+    ASSERT_VEC2_EQUAL(cool_vec, cool_vec.as_polar().as_cartesian());
+}

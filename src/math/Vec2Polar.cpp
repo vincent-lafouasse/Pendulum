@@ -10,18 +10,22 @@ Vec2 Vec2::as_polar() const {
 
     Scalar angle =
         std::atan2(this->determinant(Vec2::ref()), this->dot(Vec2::ref()));
+    /*
     while (angle < 0.0) {
         angle += Constants::Tau;
     }
     while (angle >= Constants::Tau) {
         angle -= Constants::Tau;
     }
+    */
 
     return {radius, angle};
 }
 
 Vec2 Vec2::as_cartesian() const {
-    return {};
+    Vec2 unit{std::sin(this->theta()), std::cos(this->theta())};
+
+    return this->r() * unit;
 }
 
 Vec2::Scalar Vec2::r() const {
