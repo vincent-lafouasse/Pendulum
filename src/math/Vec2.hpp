@@ -17,6 +17,13 @@ struct Vec2 final {
     [[nodiscard]] bool is_aligned_with(Vec2 other) const;
     [[nodiscard]] bool is_orthogonal_to(Vec2 other) const;
 
+    Vec2 as_polar(Vec2 origin) const; // theta=0 when downward, ie along ey
+    Scalar r() const; // alias for x when in polar
+    Scalar& r();
+    Scalar theta() const; // alias for y when in polar
+    Scalar& theta();
+    Vec2 as_cartesian(Vec2 origin);
+
     Vec2 operator+=(Vec2 other);
     Vec2 operator-=(Vec2 other);
     Vec2 operator*=(Scalar s);
