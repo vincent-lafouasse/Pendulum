@@ -7,6 +7,7 @@ struct Vec2 final {
 
     [[nodiscard]] Scalar magnitude() const;
     void normalize();
+    Vec2 normalized() const;
 
     [[nodiscard]] Scalar dot(Vec2 other) const;
     [[nodiscard]] static Scalar dot(Vec2 lhs, Vec2 rhs);

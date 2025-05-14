@@ -12,6 +12,12 @@ void Vec2::normalize() {
     *this /= this->magnitude();
 }
 
+Vec2 Vec2::normalized() const {
+    Vec2 copy(*this);
+    copy.normalize();
+    return copy;
+}
+
 Vec2::Scalar Vec2::dot(Vec2 other) const {
     return Vec2::dot(*this, other);
 }
