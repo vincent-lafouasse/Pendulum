@@ -89,10 +89,24 @@ TEST(Polar, EyHasZeroAngle) {
     ASSERT_FLOAT_EQ(same_but_bigger.theta(), 0.0);
 }
 
-
 TEST(Polar, MinusEyHasPiAngle) {
     Vec2 v = (-Vec2::ey()).as_polar();
 
     ASSERT_FLOAT_EQ(v.r(), 1.0f);
     ASSERT_FLOAT_EQ(v.theta(), Constants::Pi);
+}
+
+TEST(Polar, ExHasPiOver2Angle) {
+    Vec2 v = (Vec2::ex()).as_polar();
+
+    ASSERT_FLOAT_EQ(v.r(), 1.0f);
+    ASSERT_FLOAT_EQ(v.theta(), Constants::Pi / 2.0f);
+}
+
+
+TEST(Polar, MinusExHas3PiOver2Angle) {
+    Vec2 v = (-Vec2::ex()).as_polar();
+
+    ASSERT_FLOAT_EQ(v.r(), 1.0f);
+    ASSERT_FLOAT_EQ(v.theta(), 1.5f * Constants::Pi);
 }
