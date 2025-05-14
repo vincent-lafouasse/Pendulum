@@ -7,8 +7,6 @@ struct Vec2 final {
 
     static constexpr Vec2 ex() { return {1.0, 0.0}; }
     static constexpr Vec2 ey() { return {0.0, 1.0}; }
-    // reference for angles
-    static constexpr Vec2 ref() { return Vec2::ey(); }
 
     [[nodiscard]] Scalar magnitude() const;
     void normalize();

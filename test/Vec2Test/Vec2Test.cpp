@@ -78,37 +78,11 @@ TEST(Vec2, UnitVectorsHaveUnitMagnitude) {
     ASSERT_FLOAT_EQ(u2.magnitude(), 1.0f);
 }
 
-TEST(Polar, EyHasZeroAngle) {
-    Vec2 polar_ey = Vec2::ey().as_polar();
-
-    ASSERT_FLOAT_EQ(polar_ey.r(), 1.0f);
-    ASSERT_FLOAT_EQ(polar_ey.theta(), 0.0f);
-
-    Vec2 same_but_bigger = (4 * Vec2::ey()).as_polar();
-    ASSERT_FLOAT_EQ(same_but_bigger.r(), 4.0);
-    ASSERT_FLOAT_EQ(same_but_bigger.theta(), 0.0);
-}
-
-TEST(Polar, MinusEyHasPiAngle) {
-    Vec2 v = (-Vec2::ey()).as_polar();
-
-    ASSERT_FLOAT_EQ(v.r(), 1.0f);
-    ASSERT_FLOAT_EQ(v.theta(), Constants::Pi);
-}
-
-TEST(Polar, ExHasPiOver2Angle) {
-    Vec2 v = (Vec2::ex()).as_polar();
-
-    ASSERT_FLOAT_EQ(v.r(), 1.0f);
-    ASSERT_FLOAT_EQ(v.theta(), Constants::Pi / 2.0f);
-}
-
-
-TEST(Polar, MinusExHas3PiOver2Angle) {
-    Vec2 v = (-Vec2::ex()).as_polar();
-
-    ASSERT_FLOAT_EQ(v.r(), 1.0f);
-    ASSERT_FLOAT_EQ(v.theta(), 1.5f * Constants::Pi);
+TEST(Polar, BasisVectorsHaveCorrectAngle) {
+    ASSERT_FLOAT_EQ(Vec2::ex().as_polar().theta(), 0.0f);
+    ASSERT_FLOAT_EQ(Vec2::ey().as_polar().theta(), 0.5f * Constants::Pi);
+    ASSERT_FLOAT_EQ((-Vec2::ex()).as_polar().theta(), 1.0f * Constants::Pi);
+    ASSERT_FLOAT_EQ((-Vec2::ey()).as_polar().theta(), 1.5f * Constants::Pi);
 }
 
 TEST(Polar, BackToCartesian) {
