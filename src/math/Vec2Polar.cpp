@@ -9,7 +9,6 @@ Vec2 Vec2::as_polar(Vec2 origin) const {
         return {0.0f, 0.0f};
     }
 
-
     to_point.normalize();
     return {};
 }
