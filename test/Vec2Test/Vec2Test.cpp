@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 
 #include "math/Vec2.hpp"
+#include "math/math.hpp"
 
 #define ASSERT_VEC2_EQUAL(a, b) \
     ASSERT_FLOAT_EQ(a.x, b.x);  \
@@ -86,4 +87,12 @@ TEST(Polar, EyHasZeroAngle) {
     Vec2 same_but_bigger = (4 * Vec2::ey()).as_polar();
     ASSERT_FLOAT_EQ(same_but_bigger.r(), 4.0);
     ASSERT_FLOAT_EQ(same_but_bigger.theta(), 0.0);
+}
+
+
+TEST(Polar, MinusEyHasPiAngle) {
+    Vec2 v = (-Vec2::ey()).as_polar();
+
+    ASSERT_FLOAT_EQ(v.r(), 1.0f);
+    ASSERT_FLOAT_EQ(v.theta(), Constants::Pi);
 }
