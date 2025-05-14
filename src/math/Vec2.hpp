@@ -43,7 +43,6 @@ struct Vec2 final {
 
     Scalar x;
     Scalar y;
-
 };
 
 Vec2 operator+(Vec2 lhs, Vec2 rhs);

@@ -8,7 +8,8 @@ Vec2 Vec2::as_polar() const {
         return {0.0f, 0.0f};
     }
 
-    return {};
+    return {radius,
+            std::atan2(this->determinant(Vec2::ref()), this->dot(Vec2::ref()))};
 }
 
 Vec2 Vec2::as_cartesian() const {
