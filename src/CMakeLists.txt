@@ -21,6 +21,7 @@ PRIVATE
 		math/math.hpp
 		math/Vec2.cpp
 		math/Vec2_arithmetic.cpp
+		math/Vec2Polar.cpp
 		math/Vec2.hpp
 		math/float_equal.cpp
 )
