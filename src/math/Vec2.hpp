@@ -18,11 +18,12 @@ struct Vec2 final {
     [[nodiscard]] bool is_orthogonal_to(Vec2 other) const;
 
     Vec2 as_polar() const;
+    Vec2 as_cartesian() const;
+
     Scalar r() const;  // alias for x when in polar
     Scalar& r();
     Scalar theta() const;  // alias for y when in polar
     Scalar& theta();
-    Vec2 as_cartesian() const;
 
     Vec2 operator+=(Vec2 other);
     Vec2 operator-=(Vec2 other);
