@@ -9,6 +9,7 @@ PRIVATE
 	${testedSourceDir}/math/math.hpp
 	${testedSourceDir}/math/Vec2.cpp
 	${testedSourceDir}/math/Vec2_arithmetic.cpp
+	${testedSourceDir}/math/Vec2Polar.cpp
 	${testedSourceDir}/math/Vec2.hpp
 	${testedSourceDir}/math/float_equal.cpp
 
