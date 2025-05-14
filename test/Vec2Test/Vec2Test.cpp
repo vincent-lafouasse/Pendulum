@@ -61,3 +61,18 @@ TEST(Vec2, ExternalDivision) {
 
     ASSERT_VEC2_EQUAL(expected, actual);
 }
+
+TEST(Vec2, UnitVectorsHaveUnitMagnitude) {
+    Vec2 ex{1.0, 0.0};
+    Vec2 ey{0.0, 1.0};
+
+    float theta1 = 420.69f;
+    float theta2 = 1234567890.420f;
+    Vec2 u1{std::cos(theta1), std::sin(theta1)};
+    Vec2 u2{std::cos(theta2), std::sin(theta2)};
+
+    ASSERT_FLOAT_EQ(ex.magnitude(), 1.0f);
+    ASSERT_FLOAT_EQ(ey.magnitude(), 1.0f);
+    ASSERT_FLOAT_EQ(u1.magnitude(), 1.0f);
+    ASSERT_FLOAT_EQ(u2.magnitude(), 1.0f);
+}
