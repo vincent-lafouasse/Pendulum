@@ -40,11 +40,16 @@ Point2 compute_pixel(int x, int y) {
 }  // namespace
 
 void Renderer::render(const World& world) const {
-    (void)world;
-    SDL_SetRenderDrawColor(this->renderer, 33, 118, 174, 255);  // blue
+    constexpr SDL_Color blue{33, 118, 174, 255};
+    constexpr SDL_Color black{0, 0, 0, 255};
+
+    constexpr SDL_Color bg_color = blue;
+    constexpr SDL_Color ball_color = black;
+
+    this->set_render_color(bg_color);
     SDL_RenderClear(this->renderer);
 
-    SDL_SetRenderDrawColor(this->renderer, 0, 0, 0, 255);  // black
+    this->set_render_color(ball_color);
     for (int y = 0; y < Config::height; ++y) {
         for (int x = 0; x < Config::width; ++x) {
             const Point2 pixel = compute_pixel(x, y);
@@ -56,4 +61,8 @@ void Renderer::render(const World& world) const {
     }
 
     SDL_RenderPresent(this->renderer);
+}
+
+void Renderer::set_render_color(SDL_Color color) const {
+    SDL_SetRenderDrawColor(this->renderer, color.r, color.g, color.b, color.a);
 }
