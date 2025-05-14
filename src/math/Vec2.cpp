@@ -5,7 +5,7 @@
 #include "./math.hpp"
 
 Vec2::Scalar Vec2::magnitude() const {
-    return this->dot(*this);
+    return std::sqrt(this->dot(*this));
 }
 
 void Vec2::normalize() {
@@ -17,7 +17,7 @@ Vec2::Scalar Vec2::dot(Vec2 other) const {
 }
 
 Vec2::Scalar Vec2::dot(Vec2 lhs, Vec2 rhs) {
-    return lhs.x * rhs.x + lhs.y + rhs.y;
+    return lhs.x * rhs.x + lhs.y * rhs.y;
 }
 
 Vec2 Vec2::cross(Vec2 other) const {
