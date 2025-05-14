@@ -7,4 +7,4 @@ bool float_equal(float a, float b);
 namespace Constants {
 constexpr float Pi = M_PI;
 constexpr float Tau = 2 * Pi;
-}
+}  // namespace Constants
