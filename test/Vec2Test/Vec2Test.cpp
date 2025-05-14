@@ -76,3 +76,14 @@ TEST(Vec2, UnitVectorsHaveUnitMagnitude) {
     ASSERT_FLOAT_EQ(u1.magnitude(), 1.0f);
     ASSERT_FLOAT_EQ(u2.magnitude(), 1.0f);
 }
+
+TEST(Polar, EyHasZeroAngle) {
+    Vec2 polar_ey = Vec2::ey().as_polar();
+
+    ASSERT_FLOAT_EQ(polar_ey.r(), 1.0f);
+    ASSERT_FLOAT_EQ(polar_ey.theta(), 0.0f);
+
+    Vec2 same_but_bigger = (4 * Vec2::ey()).as_polar();
+    ASSERT_FLOAT_EQ(same_but_bigger.r(), 4.0);
+    ASSERT_FLOAT_EQ(same_but_bigger.theta(), 0.0);
+}
