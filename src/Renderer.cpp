@@ -49,18 +49,21 @@ void Renderer::render(const World& world) const {
     this->set_render_color(bg_color);
     SDL_RenderClear(this->renderer);
 
-    this->set_render_color(ball_color);
+    this->render_sphere(world.ball, ball_color);
+    SDL_RenderPresent(this->renderer);
+}
+
+void Renderer::render_sphere(Sphere s, SDL_Color color) const {
+    this->set_render_color(color);
     for (int y = 0; y < Config::height; ++y) {
         for (int x = 0; x < Config::width; ++x) {
             const Point2 pixel = compute_pixel(x, y);
 
-            if (world.ball.contains(pixel)) {
+            if (s.contains(pixel)) {
                 SDL_RenderDrawPoint(this->renderer, x, y);
             }
         }
     }
-
-    SDL_RenderPresent(this->renderer);
 }
 
 void Renderer::set_render_color(SDL_Color color) const {
