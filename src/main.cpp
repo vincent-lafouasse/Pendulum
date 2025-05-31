@@ -1,32 +1,10 @@
-#include <SDL2/SDL.h>
-
-#include "Renderer.hpp"
-#include "Timer.hpp"
-#include "Viewport.hpp"
-#include "World.hpp"
+#include <chrono>
+#include <thread>
+#include <raylib.h>
 
 int main() {
-    Config::log();
-    Viewport::log();
+    InitWindow(800, 600, "hi");
+    std::this_thread::sleep_for(std::chrono::milliseconds(4000));
+    CloseWindow();
 
-    Renderer renderer{};
-    Timer timer{};
-
-    World world{};
-
-    SDL_Event event;
-    while (true) {
-        timer.start_frame();
-        if (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                break;
-            }
-        }
-
-        renderer.render(world);
-
-        timer.cap_frame();
-    }
-
-    return (EXIT_SUCCESS);
 }
