@@ -5,6 +5,9 @@
 
 static constexpr int width = 800;
 static constexpr int height = 600;
+static constexpr Color darkGray {24, 24, 37, 255};
+static constexpr Color lavender {180, 190, 254, 255};
+static constexpr Color blue {137, 180, 250, 255};
 
 int main() {
     InitWindow(width, height, "hi");
@@ -15,13 +18,13 @@ int main() {
     float angle = 0.0f;
 
     while (!WindowShouldClose()) {
-        ClearBackground(VIOLET);
+        ClearBackground(darkGray);
         {
             BeginDrawing();
             const Vector2 offsetVector = {offset * std::sin(angle),
                                           offset * std::cos(angle)};
             const Vector2 circleCenter = Vector2Add(center, offsetVector);
-            DrawCircle(circleCenter.x, circleCenter.y, 50.0f, RED);
+            DrawCircle(circleCenter.x, circleCenter.y, 50.0f, blue);
             const float angularVelocity = std::sin(GetTime());
             angle += angularVelocity;
             EndDrawing();
