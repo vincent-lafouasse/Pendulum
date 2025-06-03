@@ -11,6 +11,7 @@ int main() {
         ClearBackground(VIOLET);
         {
             BeginDrawing();
+            DrawCircle(100, 200, 50.0f, RED);
             EndDrawing();
         }
     }
