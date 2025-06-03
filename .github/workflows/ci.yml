@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: install deps
-      run: ;
+      run: 
     
     - name: configure
       run: cmake -S . -B build -G Ninja
