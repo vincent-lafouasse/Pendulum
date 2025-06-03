@@ -1,10 +1,19 @@
-#include <chrono>
-#include <thread>
 #include <raylib.h>
 
-int main() {
-    InitWindow(800, 600, "hi");
-    std::this_thread::sleep_for(std::chrono::milliseconds(4000));
-    CloseWindow();
+static constexpr int width = 800;
+static constexpr int height = 600;
 
+int main() {
+    InitWindow(width, height, "hi");
+    SetTargetFPS(60);
+
+    while (!WindowShouldClose()) {
+        ClearBackground(VIOLET);
+        {
+            BeginDrawing();
+            EndDrawing();
+        }
+    }
+
+    CloseWindow();
 }
