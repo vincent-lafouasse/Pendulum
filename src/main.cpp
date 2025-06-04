@@ -15,7 +15,7 @@ static constexpr Color pink{245, 194, 231, 255};
 static constexpr int targetFps = 60;
 static constexpr float frameLen = 1.0 / targetFps;
 
-static constexpr float pendulumConstant = 1.0f;  // g/l
+static constexpr float pendulumConstant = 5.0f;  // g/l
 
 struct Pendulum {
     Vec2 center;
