@@ -6,6 +6,7 @@
 #include <raymath.h>
 
 class Vec2 {
+public:
     constexpr Vec2(float x, float y): self{x, y} {}
 
     constexpr Vec2(Vector2 v): self(v) {}
