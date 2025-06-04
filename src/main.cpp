@@ -148,7 +148,7 @@ int main() {
 
     const Config cfg = {
         .length1 = Length::from_millis(80.0f),
-        .initialThetaDeg1 = static_cast<float>(angleRng(rng)),
+        .initialThetaDeg1 = 170.0f,
         .mass1 = Mass::from_grams(100),
 
         .length2 = Length::from_millis(80.0f),
