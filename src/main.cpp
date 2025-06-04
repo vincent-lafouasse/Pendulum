@@ -14,7 +14,7 @@ int main() {
     SetTargetFPS(60);
 
     constexpr Vector2 center{width / 2.0f, height / 2.0f};
-    constexpr float armLength = 100.0f;
+    constexpr float armLength = height / 2.5f;
     float angle = 0.0f;
 
     while (!WindowShouldClose()) {
@@ -24,10 +24,11 @@ int main() {
             const Vector2 armVector = {armLength * std::sin(angle),
                                        armLength * std::cos(angle)};
             const Vector2 circleCenter = Vector2Add(center, armVector);
+            DrawCircleV(center, 10.0f, lavender);
             DrawCircleV(circleCenter, 50.0f, blue);
-            const float angularVelocity =
-                std::sin(static_cast<float>(GetTime()));
-            angle += angularVelocity;
+            // const float angularVelocity =
+            std::sin(static_cast<float>(GetTime()));
+            // angle += angularVelocity;
             EndDrawing();
         }
     }
