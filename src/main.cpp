@@ -18,9 +18,13 @@ constexpr float pixels(Length l) {
     return scalingFactor * l.as_millis() / 10.0f;
 }
 
+constexpr float degreesToRadians(float deg) {
+    return deg * PI / 180.0f;
+}
+
 struct Config {
     Length length;
-    float initialTheta;
+    float initialThetaDeg;
     float constant;
 };
 
@@ -39,7 +43,7 @@ struct Pendulum {
     Pendulum(Config cfg, LookAndFeel look)
         : cfg(cfg),
           look(look),
-          theta(cfg.initialTheta),
+          theta(degreesToRadians(cfg.initialThetaDeg)),
           thetaPrime(0),
           ball{0, 0} {
         const Vec2 axial = {std::sin(theta), std::cos(theta)};
@@ -88,7 +92,7 @@ int main() {
 
     constexpr Config cfg = {
         .length = Length::from_millis(35.0f),
-        .initialTheta = PI / 4.0f,
+        .initialThetaDeg = 45.0f,
         .constant = 5.0f,
     };
 
