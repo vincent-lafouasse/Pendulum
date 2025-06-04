@@ -3,8 +3,8 @@
 struct Mass {
     float grams;
 
-    [[nodiscard]] constexpr Mass from_kilos(float k) { return {1000.0f * k}; }
-    [[nodiscard]] constexpr Mass from_grams(float g) { return {g}; }
+    [[nodiscard]] static constexpr Mass from_kilos(float k) { return {1000.0f * k}; }
+    [[nodiscard]] static constexpr Mass from_grams(float g) { return {g}; }
 
     [[nodiscard]] constexpr float as_kilos() const { return grams / 1000.0f; }
     [[nodiscard]] constexpr float as_grams() const { return grams; }
@@ -15,8 +15,8 @@ struct Mass {
 struct Length {
     float millis;
 
-    [[nodiscard]] constexpr Length from_meters(float m) { return {1000.0f * m}; }
-    [[nodiscard]] constexpr Length from_millis(float m) { return {m}; }
+    [[nodiscard]] static constexpr Length from_meters(float m) { return {1000.0f * m}; }
+    [[nodiscard]] static constexpr Length from_millis(float m) { return {m}; }
 
     [[nodiscard]] constexpr float as_meters() const { return millis / 1000.0f; }
     [[nodiscard]] constexpr float as_millis() const { return millis; }
@@ -27,8 +27,8 @@ struct Length {
 struct Duration {
     float millis;
 
-    [[nodiscard]] constexpr Duration from_secs(float s) { return {1000.0f * s}; }
-    [[nodiscard]] constexpr Duration from_millis(float m) { return {m}; }
+    [[nodiscard]] static constexpr Duration from_secs(float s) { return {1000.0f * s}; }
+    [[nodiscard]] static constexpr Duration from_millis(float m) { return {m}; }
 
     [[nodiscard]] constexpr float as_secs() const { return millis / 1000.0f; }
     [[nodiscard]] constexpr float as_millis() const { return millis; }
