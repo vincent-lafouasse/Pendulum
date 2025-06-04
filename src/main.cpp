@@ -4,13 +4,10 @@
 #include <raymath.h>
 
 #include "Vec2.hpp"
+#include "catpuccin.hpp"
 
 static constexpr int width = 1600;
 static constexpr int height = 900;
-static constexpr Color darkGray{24, 24, 37, 255};
-static constexpr Color lavender{180, 190, 254, 255};
-static constexpr Color blue{137, 180, 250, 255};
-static constexpr Color pink{245, 194, 231, 255};
 
 static constexpr int targetFps = 60;
 static constexpr float frameLen = 1.0 / targetFps;
@@ -25,8 +22,8 @@ struct Pendulum {
 
     void render() const {
         constexpr float armWidth = height / 150.f;
-        constexpr Color ballColor = blue;
-        constexpr Color armColor = lavender;
+        constexpr Color ballColor = catpuccin::blue;
+        constexpr Color armColor = catpuccin::lavender;
 
         BeginDrawing();
         const Vec2 axial = {std::sin(theta), std::cos(theta)};
@@ -65,7 +62,7 @@ int main() {
     };
 
     while (!WindowShouldClose()) {
-        ClearBackground(darkGray);
+        ClearBackground(catpuccin::darkGray);
 
         p.render();
 
