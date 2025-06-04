@@ -111,16 +111,15 @@ struct Pendulum {
 
         float numerator1 = -2.0f * std::sin(dTh) * m2 *
                            (l2 * w2 * w2 + l1 * w1 * w1 * std::cos(dTh));
-        numerator1 += -g * (2 * m1 + m2) * std::sin(theta1);
+        numerator1 += -g * (2.0f * m1 + m2) * std::sin(theta1);
         numerator1 += -m2 * g * std::sin(theta1 - 2.0f * theta2);
         const float denominator1 =
             l1 * (2.0f * m1 + m2 * (1.0f - std::cos(2.0f * dTh)));
         const float angularAcceleration1 = numerator1 / denominator1;
 
         float numerator2 = 2.0f * std::sin(dTh) *
-                           (std::cos(theta1) + l1 * w1 * w1 * (m1 + m2)) * g *
-                           (m1 + m2);
-        numerator2 += l2 * m2 * w2 * w2 * std::cos(dTh);
+                           (l1 * w1 * w1 * (m1 + m2) + std::cos(theta1) * g * (m1 + m2)
+        + l2 * m2 * w2 * w2 * std::cos(dTh));
         const float denominator2 =
             l2 * (2.0f * m1 + m2 * (1.0f - std::cos(2.0f * dTh)));
         const float angularAcceleration2 = numerator2 / denominator2;
