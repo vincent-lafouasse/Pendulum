@@ -14,9 +14,9 @@ static constexpr int height = 900;
 static constexpr int targetFps = 60;
 static constexpr float frameLen = 1.0 / targetFps;
 
-static constexpr float earthAcceleration = 9.8f;  // m.s-2
+static constexpr float earthAcceleration = 2.8f;  // m.s-2
 
-static constexpr float scalingFactor = 100.0f;  // pixels per cm
+static constexpr float scalingFactor = 25.0f;  // pixels per cm
 constexpr float pixels(Length l) {
     return scalingFactor * l.as_millis() / 10.0f;
 }
@@ -99,29 +99,30 @@ struct Pendulum {
     }
 
     void update() {
-        const float deltaTheta = theta1 - theta2;
+        // all in SI units
+        const float dTh = theta1 - theta2;
+        constexpr float g = earthAcceleration;
+        const float l1 = cfg.length1.si();
+        const float l2 = cfg.length2.si();
+        const float m1 = cfg.mass1.si();
+        const float m2 = cfg.mass2.si();
+        const float w1 = thetaPrime1;
+        const float w2 = thetaPrime2;
 
-        float numerator1 = -2.0f * std::sin(deltaTheta) * cfg.mass2.si() *
-                           (cfg.length2.si() * thetaPrime2 * thetaPrime2 +
-                            cfg.length1.si() * thetaPrime1 * thetaPrime1 *
-                                std::cos(deltaTheta));
-        numerator1 += -earthAcceleration *
-                      (2 * cfg.mass1.si() + cfg.mass2.si()) * std::sin(theta1);
-        numerator1 += -cfg.mass2.si() * earthAcceleration *
-                      std::sin(theta1 - 2.0f * theta2);
+        float numerator1 = -2.0f * std::sin(dTh) * m2 *
+                           (l2 * w2 * w2 + l1 * w1 * w1 * std::cos(dTh));
+        numerator1 += -g * (2 * m1 + m2) * std::sin(theta1);
+        numerator1 += -m2 * g * std::sin(theta1 - 2.0f * theta2);
         const float denominator1 =
-            cfg.length1.si() *
-            (2.0f * cfg.mass1.si() +
-             cfg.mass2.si() * (1.0f - std::cos(2.0f * deltaTheta)));
+            l1 * (2.0f * m1 + m2 * (1.0f - std::cos(2.0f * dTh)));
         const float angularAcceleration1 = numerator1 / denominator1;
 
-        float numerator2 =
-            2.0f * std::sin(deltaTheta) *
-            (std::cos(theta1) + cfg.length1.si() * thetaPrime1 * thetaPrime1 *
-                                    (cfg.mass1.si() + cfg.mass2.si())) *
-            earthAcceleration * (cfg.mass1.si() + cfg.mass2.si());
-        numerator2 += cfg.length2.si() * cfg.mass2.si() * thetaPrime2 * thetaPrime2 * std::cos(deltaTheta);
-        const float denominator2 = cfg.length2.si() * (2.0f * cfg.mass1.si() + cfg.mass2.si() * (1.0f - std::cos(2.0f * deltaTheta)));
+        float numerator2 = 2.0f * std::sin(dTh) *
+                           (std::cos(theta1) + l1 * w1 * w1 * (m1 + m2)) * g *
+                           (m1 + m2);
+        numerator2 += l2 * m2 * w2 * w2 * std::cos(dTh);
+        const float denominator2 =
+            l2 * (2.0f * m1 + m2 * (1.0f - std::cos(2.0f * dTh)));
         const float angularAcceleration2 = numerator2 / denominator2;
 
         thetaPrime1 += angularAcceleration1 * frameLen;
@@ -142,14 +143,15 @@ int main() {
 
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> angleRng(0, 360); // distribution in range [0, 360]
+    std::uniform_int_distribution<std::mt19937::result_type> angleRng(
+        0, 360);  // distribution in range [0, 360]
 
     const Config cfg = {
-        .length1 = Length::from_millis(20.0f),
+        .length1 = Length::from_millis(80.0f),
         .initialThetaDeg1 = static_cast<float>(angleRng(rng)),
         .mass1 = Mass::from_grams(100),
 
-        .length2 = Length::from_millis(20.0f),
+        .length2 = Length::from_millis(80.0f),
         .initialThetaDeg2 = static_cast<float>(angleRng(rng)),
         .mass2 = Mass::from_grams(100),
 
