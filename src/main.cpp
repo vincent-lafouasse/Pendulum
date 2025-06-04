@@ -3,6 +3,8 @@
 #include <raylib.h>
 #include <raymath.h>
 
+#include "Vec2.hpp"
+
 static constexpr int width = 1600;
 static constexpr int height = 900;
 static constexpr Color darkGray{24, 24, 37, 255};
