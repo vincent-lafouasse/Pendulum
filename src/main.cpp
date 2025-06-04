@@ -98,12 +98,40 @@ struct Pendulum {
     }
 
     void update() {
-        const float angularAcceleration = -cfg.constant * std::sin(theta1);
-        thetaPrime1 += angularAcceleration * frameLen;
-        theta1 += thetaPrime1 * frameLen;
+        const float deltaTheta = theta1 - theta2;
 
-        const Vec2 axial = {std::sin(theta1), std::cos(theta1)};
-        ball1 = look.center + axial.scaled(pixels(cfg.length1));
+        float numerator1 = -2.0f * std::sin(deltaTheta) * cfg.mass2.si() *
+                           (cfg.length2.si() * thetaPrime2 * thetaPrime2 +
+                            cfg.length1.si() * thetaPrime1 * thetaPrime1 *
+                                std::cos(deltaTheta));
+        numerator1 += -earthAcceleration *
+                      (2 * cfg.mass1.si() + cfg.mass2.si()) * std::sin(theta1);
+        numerator1 += -cfg.mass2.si() * earthAcceleration *
+                      std::sin(theta1 - 2.0f * theta2);
+        const float denominator1 =
+            cfg.length1.si() *
+            (2.0f * cfg.mass1.si() +
+             cfg.mass2.si() * (1.0f - std::cos(2.0f * deltaTheta)));
+        const float angularAcceleration1 = numerator1 / denominator1;
+
+        float numerator2 =
+            2.0f * std::sin(deltaTheta) *
+            (std::cos(theta1) + cfg.length1.si() * thetaPrime1 * thetaPrime1 *
+                                    (cfg.mass1.si() + cfg.mass2.si())) *
+            earthAcceleration * (cfg.mass1.si() + cfg.mass2.si());
+        numerator2 += cfg.length2.si() * cfg.mass2.si() * thetaPrime2 * thetaPrime2 * std::cos(deltaTheta);
+        const float denominator2 = cfg.length2.si() * (2.0f * cfg.mass1.si() + cfg.mass2.si() * (1.0f - std::cos(2.0f * deltaTheta)));
+        const float angularAcceleration2 = numerator2 / denominator2;
+
+        thetaPrime1 += angularAcceleration1 * frameLen;
+        theta1 += thetaPrime1 * frameLen;
+        thetaPrime2 += angularAcceleration2 * frameLen;
+        theta2 += thetaPrime2 * frameLen;
+
+        const Vec2 axial1 = {std::sin(theta1), std::cos(theta1)};
+        ball1 = look.center + axial1.scaled(pixels(cfg.length1));
+        const Vec2 axial2 = {std::sin(theta2), std::cos(theta2)};
+        ball2 = ball1 + axial2.scaled(pixels(cfg.length2));
     }
 };
 
@@ -114,11 +142,11 @@ int main() {
     constexpr Config cfg = {
         .length1 = Length::from_millis(20.0f),
         .initialThetaDeg1 = 45.0f,
-        .mass1 = Mass::from_grams(200),
+        .mass1 = Mass::from_grams(100),
 
         .length2 = Length::from_millis(20.0f),
         .initialThetaDeg2 = -45.0f,
-        .mass2 = Mass::from_grams(200),
+        .mass2 = Mass::from_grams(100),
 
         .constant = 5.0f,
     };
@@ -140,7 +168,7 @@ int main() {
 
     while (!WindowShouldClose()) {
         p.render();
-        // p.update();
+        p.update();
     }
 
     CloseWindow();
