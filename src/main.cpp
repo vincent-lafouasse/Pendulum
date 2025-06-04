@@ -32,12 +32,20 @@ struct LookAndFeel {
 
 struct Pendulum {
     Pendulum(Config cfg, LookAndFeel look)
-        : cfg(cfg), look(look), theta(cfg.initialTheta), thetaPrime(0) {}
+        : cfg(cfg),
+          look(look),
+          theta(cfg.initialTheta),
+          thetaPrime(0),
+          ball{0, 0} {
+        const Vec2 axial = {std::sin(theta), std::cos(theta)};
+        ball = look.center + axial.scaled(cfg.length);
+    }
 
     const Config cfg;
     const LookAndFeel look;
     float theta;
     float thetaPrime;
+    Vec2 ball;
 
     void renderArm(Vec2 from, Vec2 to, Color color) const {
         const Vec2 delta =
@@ -53,12 +61,9 @@ struct Pendulum {
     void render() const {
         ClearBackground(look.backgroundColor);
         BeginDrawing();
-        const Vec2 axial = {std::sin(theta), std::cos(theta)};
-        const Vec2 circleCenter = look.center + axial.scaled(cfg.length);
-
-        this->renderArm(look.center, circleCenter, look.armColor);
+        this->renderArm(look.center, ball, look.armColor);
         DrawCircleV(look.center.get(), look.armWidth, look.centerColor);
-        DrawCircleV(circleCenter.get(), look.radius, look.ballColor);
+        DrawCircleV(ball.get(), look.radius, look.ballColor);
 
         EndDrawing();
     }
@@ -67,6 +72,8 @@ struct Pendulum {
         const float angularAcceleration = -cfg.constant * std::sin(theta);
         thetaPrime += angularAcceleration * frameLen;
         theta += thetaPrime * frameLen;
+        const Vec2 axial = {std::sin(theta), std::cos(theta)};
+        ball = look.center + axial.scaled(cfg.length);
     }
 };
 
