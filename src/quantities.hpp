@@ -22,3 +22,15 @@ struct Length {
     [[nodiscard]] constexpr float as_millis() const { return millis; }
     [[nodiscard]] constexpr float si() const { return as_meters(); }
 };
+
+
+struct Duration {
+    float millis;
+
+    [[nodiscard]] constexpr Duration from_secs(float s) { return {1000.0f * s}; }
+    [[nodiscard]] constexpr Duration from_millis(float m) { return {m}; }
+
+    [[nodiscard]] constexpr float as_secs() const { return millis / 1000.0f; }
+    [[nodiscard]] constexpr float as_millis() const { return millis; }
+    [[nodiscard]] constexpr float si() const { return as_secs(); }
+};
