@@ -22,8 +22,9 @@ struct Pendulum {
 
     void render() const {
         constexpr float armWidth = height / 150.f;
-        constexpr Color ballColor = catpuccin::blue;
-        constexpr Color armColor = catpuccin::lavender;
+        constexpr Color centerColor = catpuccin::lavender;
+        constexpr Color armColor = catpuccin::blue;
+        constexpr Color ballColor = catpuccin::teal;
 
         BeginDrawing();
         const Vec2 axial = {std::sin(theta), std::cos(theta)};
@@ -38,7 +39,7 @@ struct Pendulum {
         DrawTriangle(a.get(), b.get(), c.get(), armColor);
         DrawTriangle(c.get(), d.get(), a.get(), armColor);
 
-        DrawCircleV(center.get(), armWidth, armColor);
+        DrawCircleV(center.get(), armWidth, centerColor);
         DrawCircleV(circleCenter.get(), 50.0f, ballColor);
 
         EndDrawing();
