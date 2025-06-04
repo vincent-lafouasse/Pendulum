@@ -27,6 +27,7 @@ struct LookAndFeel {
     Color centerColor;
     Color armColor;
     Color ballColor;
+    Color backgroundColor;
 };
 
 struct Pendulum {
@@ -50,7 +51,7 @@ struct Pendulum {
     }
 
     void render() const {
-        ClearBackground(catpuccin::darkGray);
+        ClearBackground(look.backgroundColor);
         BeginDrawing();
         const Vec2 axial = {std::sin(theta), std::cos(theta)};
         const Vec2 circleCenter = look.center + axial.scaled(cfg.length);
@@ -87,6 +88,7 @@ int main() {
         .centerColor = catpuccin::lavender,
         .armColor = catpuccin::blue,
         .ballColor = catpuccin::teal,
+        .backgroundColor = catpuccin::darkGray,
     };
 
     Pendulum p(cfg, look);
