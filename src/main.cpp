@@ -25,6 +25,8 @@ struct Pendulum {
 
     void render() const {
         constexpr float armWidth = height / 150.f;
+        constexpr Color ballColor = blue;
+        constexpr Color armColor = lavender;
 
         BeginDrawing();
         const Vec2 axial = {std::sin(theta), std::cos(theta)};
@@ -36,11 +38,11 @@ struct Pendulum {
         const Vec2 b = center + delta;
         const Vec2 c = circleCenter + delta;
         const Vec2 d = circleCenter - delta;
-        DrawTriangle(a.get(), b.get(), c.get(), lavender);
-        DrawTriangle(c.get(), d.get(), a.get(), lavender);
+        DrawTriangle(a.get(), b.get(), c.get(), armColor);
+        DrawTriangle(c.get(), d.get(), a.get(), armColor);
 
-        DrawCircleV(center.get(), armWidth, lavender);
-        DrawCircleV(circleCenter.get(), 50.0f, blue);
+        DrawCircleV(center.get(), armWidth, armColor);
+        DrawCircleV(circleCenter.get(), 50.0f, ballColor);
 
         EndDrawing();
     }
