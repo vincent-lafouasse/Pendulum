@@ -12,18 +12,34 @@ static constexpr int height = 900;
 static constexpr int targetFps = 60;
 static constexpr float frameLen = 1.0 / targetFps;
 
-static constexpr float pendulumConstant = 5.0f;  // g/l
+struct Config {
+    float length;
+    float initialTheta;
+    float constant;
+};
+
+struct LookAndFeel {
+    Vec2 center;
+    float armWidth;
+    float radius;
+
+    Color centerColor;
+    Color armColor;
+    Color ballColor;
+};
 
 struct Pendulum {
-    Vec2 center;
-    float armLength;
+    Pendulum(Config cfg, LookAndFeel look)
+        : cfg(cfg), look(look), theta(cfg.initialTheta), thetaPrime(0) {}
+
+    const Config cfg;
+    const LookAndFeel look;
     float theta;
     float thetaPrime;
 
     void renderArm(Vec2 from, Vec2 to, Color color) const {
-        constexpr float armWidth = height / 150.f;
         const Vec2 delta =
-            (to - from).normalized().transverse().scaled(armWidth);
+            (to - from).normalized().transverse().scaled(look.armWidth);
         const Vec2 a = from - delta;
         const Vec2 b = from + delta;
         const Vec2 c = to + delta;
@@ -33,20 +49,22 @@ struct Pendulum {
     }
 
     void render() const {
-        constexpr Color centerColor = catpuccin::lavender;
-        constexpr Color armColor = catpuccin::blue;
-        constexpr Color ballColor = catpuccin::teal;
-        constexpr float armWidth = height / 150.f;
-
+        ClearBackground(catpuccin::darkGray);
         BeginDrawing();
         const Vec2 axial = {std::sin(theta), std::cos(theta)};
-        const Vec2 circleCenter = center + axial.scaled(armLength);
+        const Vec2 circleCenter = look.center + axial.scaled(cfg.length);
 
-        this->renderArm(center, circleCenter, armColor);
-        DrawCircleV(center.get(), armWidth, centerColor);
-        DrawCircleV(circleCenter.get(), 50.0f, ballColor);
+        this->renderArm(look.center, circleCenter, look.armColor);
+        DrawCircleV(look.center.get(), look.armWidth, look.centerColor);
+        DrawCircleV(circleCenter.get(), look.radius, look.ballColor);
 
         EndDrawing();
+    }
+
+    void update() {
+        const float angularAcceleration = -cfg.constant * std::sin(theta);
+        thetaPrime += angularAcceleration * frameLen;
+        theta += thetaPrime * frameLen;
     }
 };
 
@@ -54,26 +72,27 @@ int main() {
     InitWindow(width, height, "hi");
     SetTargetFPS(targetFps);
 
-    constexpr Vec2 center{width / 2.0f, height / 2.0f};
-    constexpr float armLength = height / 2.5f;
-    constexpr float initialAngle = PI / 4.0f;
-    constexpr float inititialAngularSpeed = 0.0f;
-
-    Pendulum p = {
-        .center = center,
-        .armLength = armLength,
-        .theta = initialAngle,
-        .thetaPrime = inititialAngularSpeed,
+    constexpr Config cfg = {
+        .length = height / 2.5f,
+        .initialTheta = PI / 4.0f,
+        .constant = 5.0f,
     };
 
+    constexpr LookAndFeel look = {
+        .center = {width / 2.0f, height / 2.0f},
+        .armWidth = height / 150.f,
+        .radius = 50.0f,
+
+        .centerColor = catpuccin::lavender,
+        .armColor = catpuccin::blue,
+        .ballColor = catpuccin::teal,
+    };
+
+    Pendulum p(cfg, look);
+
     while (!WindowShouldClose()) {
-        ClearBackground(catpuccin::darkGray);
-
         p.render();
-
-        const float angularAcceleration = -pendulumConstant * std::sin(p.theta);
-        p.thetaPrime += angularAcceleration * frameLen;
-        p.theta += p.thetaPrime * frameLen;
+        p.update();
     }
 
     CloseWindow();
