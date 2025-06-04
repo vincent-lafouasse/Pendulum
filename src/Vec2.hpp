@@ -15,25 +15,25 @@ public:
     [[nodiscard]]static constexpr Vec2 sub(Vec2 a, Vec2 b) {
         return Vector2Subtract(a.get(), b.get());
     }
-    [[nodiscard]]constexpr Vec2 sub(Vec2 other) const {
+    [[nodiscard]]constexpr Vec2 operator-(Vec2 other) const {
         return Vec2::sub(*this, other);
     }
 
     [[nodiscard]]static constexpr Vec2 add(Vec2 a, Vec2 b) {
         return Vector2Add(a.get(), b.get());
     }
-    [[nodiscard]]constexpr Vec2 add(Vec2 other) const {
+    [[nodiscard]]constexpr Vec2 operator+(Vec2 other) const {
         return Vec2::add(*this, other);
     }
 
     [[nodiscard]]static constexpr Vec2 negate(Vec2 v) {
         return Vector2Negate(v.get());
     }
-    [[nodiscard]]constexpr Vec2 negated() const {
+    [[nodiscard]]constexpr Vec2 operator-() const {
         return Vec2::negate(*this);
     }
     constexpr void negate() {
-        *this = this->negated();
+        *this = -*this;
     }
 
 

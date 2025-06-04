@@ -21,7 +21,7 @@ int main() {
     InitWindow(width, height, "hi");
     SetTargetFPS(targetFps);
 
-    constexpr Vector2 center{width / 2.0f, height / 2.0f};
+    constexpr Vec2 center{width / 2.0f, height / 2.0f};
     constexpr float armLength = height / 2.5f;
     constexpr float armWidth = height / 150.f;
     float angle = PI / 4.0f;
@@ -31,21 +31,20 @@ int main() {
         ClearBackground(darkGray);
         {
             BeginDrawing();
-            const Vector2 axial = {std::sin(angle), std::cos(angle)};
-            const Vector2 transverse = {-axial.y, axial.x};
-            const Vector2 circleCenter =
-                Vector2Add(center, Vector2Scale(axial, armLength));
+            const Vec2 axial = {std::sin(angle), std::cos(angle)};
+            const Vec2 transverse = {-axial.y(), axial.x()};
+            const Vec2 circleCenter = center + axial.scaled(armLength);
 
-            const Vector2 delta = Vector2Scale(transverse, armWidth);
-            const Vector2 a = Vector2Subtract(center, delta);
-            const Vector2 b = Vector2Add(center, delta);
-            const Vector2 c = Vector2Add(circleCenter, delta);
-            const Vector2 d = Vector2Subtract(circleCenter, delta);
-            DrawTriangle(a, b, c, lavender);
-            DrawTriangle(c, d, a, lavender);
+            const Vec2 delta = transverse.scaled(armWidth);
+            const Vec2 a = center - delta;
+            const Vec2 b = center + delta;
+            const Vec2 c = circleCenter + delta;
+            const Vec2 d = circleCenter - delta;
+            DrawTriangle(a.get(), b.get(), c.get(), lavender);
+            DrawTriangle(c.get(), d.get(), a.get(), lavender);
 
-            DrawCircleV(center, armWidth, lavender);
-            DrawCircleV(circleCenter, 50.0f, blue);
+            DrawCircleV(center.get(), armWidth, lavender);
+            DrawCircleV(circleCenter.get(), 50.0f, blue);
 
             EndDrawing();
         }
