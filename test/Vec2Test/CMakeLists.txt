@@ -6,13 +6,7 @@ PRIVATE
 	./main.cpp
 	./Vec2Test.cpp
 
-	${testedSourceDir}/math/math.hpp
-	${testedSourceDir}/math/Vec2.cpp
-	${testedSourceDir}/math/Vec2_arithmetic.cpp
-	${testedSourceDir}/math/Vec2Polar.cpp
-	${testedSourceDir}/math/Vec2.hpp
-	${testedSourceDir}/math/float_equal.cpp
-
+	${testedSourceDir}/Vec2.hpp
 )
 
 target_include_directories(Vec2Test
@@ -24,4 +18,5 @@ PUBLIC
 target_link_libraries(Vec2Test
 PRIVATE
 	gtest
+	raylib
 )
