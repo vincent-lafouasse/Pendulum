@@ -8,7 +8,7 @@ struct Mass {
 
     [[nodiscard]] float as_kilos() const { return grams / 1000.0f; }
     [[nodiscard]] float as_grams() const { return grams; }
-    [[nodiscard]] float si() const { return as_grams(); }
+    [[nodiscard]] float si() const { return as_kilos(); }
 };
 
 
@@ -20,5 +20,5 @@ struct Length {
 
     [[nodiscard]] float as_meters() const { return millis / 1000.0f; }
     [[nodiscard]] float as_millis() const { return millis; }
-    [[nodiscard]] float si() const { return as_millis(); }
+    [[nodiscard]] float si() const { return as_meters(); }
 };
