@@ -13,7 +13,7 @@ static constexpr int height = 900;
 static constexpr int targetFps = 60;
 static constexpr float frameLen = 1.0 / targetFps;
 
-static constexpr float earthAcceleration = 9.8f; // m.s-2
+static constexpr float earthAcceleration = 9.8f;  // m.s-2
 
 static constexpr float scalingFactor = 100.0f;  // pixels per cm
 constexpr float pixels(Length l) {
