@@ -1,4 +1,5 @@
 #include <cmath>
+#include <random>
 
 #include <raylib.h>
 #include <raymath.h>
@@ -139,13 +140,17 @@ int main() {
     InitWindow(width, height, "hi");
     SetTargetFPS(targetFps);
 
-    constexpr Config cfg = {
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> angleRng(0, 360); // distribution in range [0, 360]
+
+    const Config cfg = {
         .length1 = Length::from_millis(20.0f),
-        .initialThetaDeg1 = 45.0f,
+        .initialThetaDeg1 = static_cast<float>(angleRng(rng)),
         .mass1 = Mass::from_grams(100),
 
         .length2 = Length::from_millis(20.0f),
-        .initialThetaDeg2 = -45.0f,
+        .initialThetaDeg2 = static_cast<float>(angleRng(rng)),
         .mass2 = Mass::from_grams(100),
 
         .constant = 5.0f,
