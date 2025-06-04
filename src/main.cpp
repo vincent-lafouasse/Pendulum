@@ -13,8 +13,13 @@ static constexpr int height = 900;
 static constexpr int targetFps = 60;
 static constexpr float frameLen = 1.0 / targetFps;
 
+static constexpr float scalingFactor = 100.0f;  // pixels per cm
+constexpr float lengthToPixel(Length l) {
+    return scalingFactor * l.as_millis() / 10.0f;
+}
+
 struct Config {
-    float length;
+    Length length;
     float initialTheta;
     float constant;
 };
@@ -38,7 +43,7 @@ struct Pendulum {
           thetaPrime(0),
           ball{0, 0} {
         const Vec2 axial = {std::sin(theta), std::cos(theta)};
-        ball = look.center + axial.scaled(cfg.length);
+        ball = look.center + axial.scaled(lengthToPixel(cfg.length));
     }
 
     const Config cfg;
@@ -73,7 +78,7 @@ struct Pendulum {
         thetaPrime += angularAcceleration * frameLen;
         theta += thetaPrime * frameLen;
         const Vec2 axial = {std::sin(theta), std::cos(theta)};
-        ball = look.center + axial.scaled(cfg.length);
+        ball = look.center + axial.scaled(lengthToPixel(cfg.length));
     }
 };
 
@@ -82,7 +87,7 @@ int main() {
     SetTargetFPS(targetFps);
 
     constexpr Config cfg = {
-        .length = height / 2.5f,
+        .length = Length::from_millis(35.0f),
         .initialTheta = PI / 4.0f,
         .constant = 5.0f,
     };
