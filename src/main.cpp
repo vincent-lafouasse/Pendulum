@@ -24,8 +24,7 @@ int main() {
             const Vector2 armVector = {armLength * std::sin(angle),
                                        armLength * std::cos(angle)};
             const Vector2 circleCenter = Vector2Add(center, armVector);
-            DrawCircle(static_cast<int>(circleCenter.x),
-                       static_cast<int>(circleCenter.y), 50.0f, blue);
+            DrawCircleV(circleCenter, 50.0f, blue);
             const float angularVelocity =
                 std::sin(static_cast<float>(GetTime()));
             angle += angularVelocity;
