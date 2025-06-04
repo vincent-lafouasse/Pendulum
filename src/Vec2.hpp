@@ -61,6 +61,26 @@ public:
         return Vec2::addValue(*this, f);
     }
 
+    [[nodiscard]]static constexpr float dot(Vec2 a, Vec2 b) {
+        return a.x() * b.x() + a.y() * b.y();
+    }
+    [[nodiscard]]constexpr float dot(Vec2 other) const {
+        return Vec2::dot(*this, other);
+    }
+
+    [[nodiscard]]constexpr float magnitude() const {
+        return std::sqrt(this->dot(*this));
+    }
+
+    [[nodiscard]]constexpr Vec2 normalized() const {
+        return this->scaled(1.0f / this->magnitude());
+    }
+
+    [[nodiscard]]constexpr Vec2 transverse() const {
+        return {-y(), x()};
+    }
+
+
     constexpr bool operator==(Vec2 other) const {
         return Vector2Equals(this->get(), other.get());
     }
