@@ -5,6 +5,7 @@
 
 #include "Vec2.hpp"
 #include "catpuccin.hpp"
+#include "quantities.hpp"
 
 static constexpr int width = 1600;
 static constexpr int height = 900;
