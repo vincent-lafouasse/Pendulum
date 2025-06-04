@@ -20,25 +20,29 @@ struct Pendulum {
     float theta;
     float thetaPrime;
 
-    void render() const {
+    void renderArm(Vec2 from, Vec2 to, Color color) const {
         constexpr float armWidth = height / 150.f;
+        const Vec2 delta =
+            (to - from).normalized().transverse().scaled(armWidth);
+        const Vec2 a = from - delta;
+        const Vec2 b = from + delta;
+        const Vec2 c = to + delta;
+        const Vec2 d = to - delta;
+        DrawTriangle(a.get(), b.get(), c.get(), color);
+        DrawTriangle(c.get(), d.get(), a.get(), color);
+    }
+
+    void render() const {
         constexpr Color centerColor = catpuccin::lavender;
         constexpr Color armColor = catpuccin::blue;
         constexpr Color ballColor = catpuccin::teal;
+        constexpr float armWidth = height / 150.f;
 
         BeginDrawing();
         const Vec2 axial = {std::sin(theta), std::cos(theta)};
-        const Vec2 transverse = {-axial.y(), axial.x()};
         const Vec2 circleCenter = center + axial.scaled(armLength);
 
-        const Vec2 delta = transverse.scaled(armWidth);
-        const Vec2 a = center - delta;
-        const Vec2 b = center + delta;
-        const Vec2 c = circleCenter + delta;
-        const Vec2 d = circleCenter - delta;
-        DrawTriangle(a.get(), b.get(), c.get(), armColor);
-        DrawTriangle(c.get(), d.get(), a.get(), armColor);
-
+        this->renderArm(center, circleCenter, armColor);
         DrawCircleV(center.get(), armWidth, centerColor);
         DrawCircleV(circleCenter.get(), 50.0f, ballColor);
 
