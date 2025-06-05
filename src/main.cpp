@@ -33,8 +33,6 @@ struct Config {
     Length length2;
     float initialThetaDeg2;
     Mass mass2;
-
-    float constant;
 };
 
 struct LookAndFeel {
@@ -154,8 +152,6 @@ int main() {
         .length2 = Length::from_millis(80.0f),
         .initialThetaDeg2 = static_cast<float>(angleRng(rng)),
         .mass2 = Mass::from_grams(100),
-
-        .constant = 5.0f,
     };
 
     constexpr LookAndFeel look = {
