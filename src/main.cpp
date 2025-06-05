@@ -63,8 +63,7 @@ struct Pendulum {
     float thetaPrime2;
 
     static void renderArm(Vec2 from, Vec2 to, Color color, float width) {
-        const Vec2 delta =
-            (to - from).normalized().transverse().scaled(width);
+        const Vec2 delta = (to - from).normalized().transverse().scaled(width);
         const Vec2 a = from - delta;
         const Vec2 b = from + delta;
         const Vec2 c = to + delta;

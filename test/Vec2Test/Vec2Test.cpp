@@ -2,8 +2,8 @@
 
 #include "Vec2.hpp"
 
-#define ASSERT_VEC2_EQUAL(a, b) \
-    ASSERT_FLOAT_EQ(a.x(), b.x());  \
+#define ASSERT_VEC2_EQUAL(a, b)    \
+    ASSERT_FLOAT_EQ(a.x(), b.x()); \
     ASSERT_FLOAT_EQ(a.y(), b.y());
 
 TEST(Vec2, Initialization) {
