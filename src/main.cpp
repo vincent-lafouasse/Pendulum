@@ -46,6 +46,8 @@ struct LookAndFeel {
     Color armColor2;
     Color ballColor2;
     Color backgroundColor;
+
+    bool displayFps;
 };
 
 struct Pendulum {
@@ -85,6 +87,10 @@ struct Pendulum {
         DrawCircleV(look.center.get(), look.armWidth, look.centerColor);
         DrawCircleV(ball1.get(), look.radius, look.ballColor1);
         DrawCircleV(ball2.get(), look.radius, look.ballColor2);
+
+        if (look.displayFps) {
+            DrawFPS(0, 0);
+        }
 
         EndDrawing();
     }
@@ -142,7 +148,7 @@ int main() {
         .mass2 = Mass::from_grams(400),
     };
 
-    constexpr LookAndFeel look = {
+    LookAndFeel look = {
         .center = {width / 2.0f, height / 2.0f},
         .armWidth = height / 270.f,
         .radius = 20.0f,
@@ -153,11 +159,22 @@ int main() {
         .armColor2 = catpuccin::peach,
         .ballColor2 = catpuccin::red,
         .backgroundColor = catpuccin::darkGray,
+
+        .displayFps = false,
     };
 
     Pendulum p(cfg);
 
+    bool spaceKeyIsDown = false;
+
     while (!WindowShouldClose()) {
+        if (IsKeyDown(KEY_SPACE) && !spaceKeyIsDown) {
+            look.displayFps = !look.displayFps;
+            spaceKeyIsDown = true;
+        } else if (IsKeyUp(KEY_SPACE)) {
+            spaceKeyIsDown = false;
+        }
+
         p.render(look);
         p.update();
     }
