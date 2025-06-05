@@ -129,7 +129,7 @@ int main() {
 
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> angleRng(
+    std::uniform_int_distribution<std::mt19937::result_type> angleDistribution(
         0, 360);  // distribution in range [0, 360]
 
     const Config cfg = {
@@ -138,7 +138,7 @@ int main() {
         .mass1 = Mass::from_grams(100),
 
         .length2 = Length::from_millis(80.0f),
-        .initialThetaDeg2 = static_cast<float>(angleRng(rng)),
+        .initialThetaDeg2 = static_cast<float>(angleDistribution(rng)),
         .mass2 = Mass::from_grams(100),
     };
 
