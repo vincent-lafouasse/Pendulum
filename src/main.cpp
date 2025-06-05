@@ -49,7 +49,7 @@ struct LookAndFeel {
 };
 
 struct Pendulum {
-    Pendulum(Config cfg)
+    explicit Pendulum(Config cfg)
         : cfg(cfg),
           theta1(degreesToRadians(cfg.initialThetaDeg1)),
           thetaPrime1(0),
