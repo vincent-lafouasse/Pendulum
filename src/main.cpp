@@ -11,12 +11,12 @@
 static constexpr int width = 1600;
 static constexpr int height = 900;
 
-static constexpr int targetFps = 60;
+static constexpr int targetFps = 140;
 static constexpr float frameLen = 1.0 / targetFps;
 
-static constexpr float earthAcceleration = 2.8f;  // m.s-2
+static constexpr float earthAcceleration = 9.8f;  // m.s-2
 
-static constexpr float scalingFactor = 25.0f;  // pixels per cm
+static constexpr float scalingFactor = 10.0f;  // pixels per cm
 constexpr float pixels(Length l) {
     return scalingFactor * l.as_millis() / 10.0f;
 }
@@ -133,13 +133,13 @@ int main() {
         0, 360);  // distribution in range [0, 360]
 
     const Config cfg = {
-        .length1 = Length::from_millis(80.0f),
+        .length1 = Length::from_millis(200.0f),
         .initialThetaDeg1 = 170.0f,
-        .mass1 = Mass::from_grams(100),
+        .mass1 = Mass::from_grams(400),
 
-        .length2 = Length::from_millis(80.0f),
-        .initialThetaDeg2 = static_cast<float>(angleDistribution(rng)),
-        .mass2 = Mass::from_grams(100),
+        .length2 = Length::from_millis(200.0f),
+        .initialThetaDeg2 = 90.0f,
+        .mass2 = Mass::from_grams(400),
     };
 
     constexpr LookAndFeel look = {
